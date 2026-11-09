@@ -17,7 +17,7 @@
   --line-soft: #ebe7e4;
   --bg: #ffffff;
   --soft: #f7f5f3;
-  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", sans-serif;
   --gutter: max(20px, env(safe-area-inset-left, 0px));
   color-scheme: light;
 }
@@ -135,6 +135,25 @@ form { padding: 8px 0 0; }
   .two .field { margin-bottom: 0; }
 }
 @media (max-width: 360px) { .logo small { display: none; } .opts.cols { grid-template-columns: 1fr; } }
+
+/* Traduction en mandarin : même ligne, séparée par une barre oblique discrète */
+.zh, i[lang] { font-style: normal; font-weight: 400; color: var(--muted); letter-spacing: 0; }
+.zh::before { content: "/"; margin: 0 .45em; color: #c9c2bf; font-weight: 300; }
+h1 .zh, .lede .zh, .note .zh, .done p .zh, .err .zh { display: block; margin-top: 4px; }
+h1 .zh::before, .lede .zh::before, .note .zh::before, .done p .zh::before, .err .zh::before { margin-left: 0; }
+h1 .zh { font-size: 19px; font-weight: 500; margin-top: 8px; }
+.err .zh { color: var(--red); opacity: .85; margin-top: 2px; }
+.block h2 .zh { letter-spacing: .08em; color: #8d8586; }
+.opt-i span .zh { font-size: 14.5px; }
+.opt-i input:checked + span .zh { font-weight: 400; }
+.btn .zh { color: rgba(255,255,255,.85); }
+.btn .zh::before { color: rgba(255,255,255,.5); }
+.top-tel i { margin-right: .25em; }
+.row .zh { font-size: 14px; }
+.legal .zh { color: var(--muted); }
+.done h2 .zh { display: block; font-size: 17px; font-weight: 500; margin-top: 2px; }
+.done h2 .zh::before { margin-left: 0; }
+@media (max-width: 400px) { .logo small { display: none; } }
 </style>
 </head>
 <body>
@@ -149,63 +168,62 @@ form { padding: 8px 0 0; }
       </svg>
       <span><b>WIT</b><small>IMMOBILIER D'ENTREPRISE</small></span>
     </a>
-    <a class="top-tel" href="tel:+33183834438"><span>Tél.</span> 01 83 83 44 38</a>
+    <a class="top-tel" href="tel:+33183834438"><span>Tél. <i lang="zh-Hans">电话</i></span> 01 83 83 44 38</a>
   </div>
 </header>
 
 <main class="wrap">
   <section class="intro">
     <div class="bar" aria-hidden="true"></div>
-    <h1>Être recontacté par un consultant</h1>
-    <p class="lede">Laissez vos coordonnées et quelques mots sur votre projet. Un consultant WIT vous rappelle.</p>
+    <h1>Être recontacté par un consultant<span class="zh" lang="zh-Hans">请顾问与您联系</span></h1>
+    <p class="lede">Laissez vos coordonnées et quelques mots sur votre projet. Un consultant WIT vous rappelle.<span class="zh" lang="zh-Hans">请留下您的联系方式并简要介绍您的项目，WIT 顾问将回电给您。</span></p>
   </section>
 
   <form id="f" novalidate>
     <div class="block">
-      <h2>Vos coordonnées</h2>
+      <h2>Vos coordonnées<span class="zh" lang="zh-Hans">联系方式</span></h2>
       <div class="field" id="f-nom">
-        <label for="nom">Nom et prénom <span class="req">*</span></label>
+        <label for="nom">Nom et prénom<span class="zh" lang="zh-Hans">姓名</span> <span class="req">*</span></label>
         <input id="nom" name="nom" type="text" autocomplete="name" autocapitalize="words" required>
-        <p class="err">Indiquez votre nom et votre prénom.</p>
+        <p class="err">Indiquez votre nom et votre prénom.<span class="zh" lang="zh-Hans">请填写您的姓名。</span></p>
       </div>
       <div class="two">
         <div class="field" id="f-tel">
-          <label for="tel">Téléphone <span class="req">*</span></label>
+          <label for="tel">Téléphone<span class="zh" lang="zh-Hans">电话</span> <span class="req">*</span></label>
           <input id="tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" required>
-          <p class="err">Indiquez un numéro de téléphone valide.</p>
+          <p class="err">Indiquez un numéro de téléphone valide.<span class="zh" lang="zh-Hans">请填写有效的电话号码。</span></p>
         </div>
         <div class="field" id="f-mail">
-          <label for="mail">Email <span class="opt">(facultatif)</span></label>
+          <label for="mail">Email<span class="zh" lang="zh-Hans">电子邮箱</span> <span class="opt">(facultatif / <i lang="zh-Hans">选填</i>)</span></label>
           <input id="mail" name="mail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false">
-          <p class="err">Cette adresse email ne semble pas valide.</p>
+          <p class="err">Cette adresse email ne semble pas valide.<span class="zh" lang="zh-Hans">该电子邮箱地址似乎无效。</span></p>
         </div>
       </div>
     </div>
 
     <div class="block">
-      <h2>C'est pour</h2>
-      <div class="opts cols" role="radiogroup" aria-label="C'est pour">
-        <label class="opt-i"><input type="radio" name="projet" value="Un projet professionnel"><span>Un projet professionnel</span></label>
-        <label class="opt-i"><input type="radio" name="projet" value="Achat"><span>Achat</span></label>
-        <label class="opt-i"><input type="radio" name="projet" value="Location"><span>Location</span></label>
-        <label class="opt-i"><input type="radio" name="projet" value="Vente"><span>Vente</span></label>
+      <h2>Projet<span class="zh" lang="zh-Hans">项目</span></h2>
+      <div class="opts" role="radiogroup" aria-label="Projet">
+        <label class="opt-i"><input type="radio" name="projet" value="Achat"><span>Achat<em class="zh" lang="zh-Hans">购买</em></span></label>
+        <label class="opt-i"><input type="radio" name="projet" value="Location"><span>Location<em class="zh" lang="zh-Hans">租赁</em></span></label>
+        <label class="opt-i"><input type="radio" name="projet" value="Vente"><span>Vente<em class="zh" lang="zh-Hans">出售</em></span></label>
       </div>
     </div>
 
     <div class="block">
-      <h2>Je recherche</h2>
+      <h2>Je recherche<span class="zh" lang="zh-Hans">我在寻找</span></h2>
       <div class="opts">
-        <label class="opt-i box"><input type="checkbox" name="type" value="Entrepôt"><span>Entrepôt</span></label>
-        <label class="opt-i box"><input type="checkbox" name="type" value="Bureau"><span>Bureau</span></label>
-        <label class="opt-i box"><input type="checkbox" name="type" value="Logistique"><span>Logistique</span></label>
+        <label class="opt-i box"><input type="checkbox" name="type" value="Entrepôt"><span>Entrepôt<em class="zh" lang="zh-Hans">仓库</em></span></label>
+        <label class="opt-i box"><input type="checkbox" name="type" value="Bureau"><span>Bureau<em class="zh" lang="zh-Hans">办公室</em></span></label>
+        <label class="opt-i box"><input type="checkbox" name="type" value="Logistique"><span>Logistique<em class="zh" lang="zh-Hans">物流</em></span></label>
       </div>
-      <p class="hint">Plusieurs choix possibles.</p>
+      <p class="hint">Plusieurs choix possibles.<span class="zh" lang="zh-Hans">可多选。</span></p>
     </div>
 
     <div class="block">
       <div class="field">
-        <label for="msg">Informations supplémentaires <span class="opt">(facultatif)</span></label>
-        <textarea id="msg" name="msg" rows="4" placeholder="Surface, secteur, délai, budget…"></textarea>
+        <label for="msg">Informations supplémentaires<span class="zh" lang="zh-Hans">补充信息</span> <span class="opt">(facultatif / <i lang="zh-Hans">选填</i>)</span></label>
+        <textarea id="msg" name="msg" rows="4" placeholder="Surface, secteur, délai, budget… / 面积、区域、时间、预算……"></textarea>
       </div>
     </div>
 
@@ -213,25 +231,25 @@ form { padding: 8px 0 0; }
 
     <div class="send">
       <p class="alert" id="alert" role="alert"></p>
-      <button class="btn" type="submit" id="go"><span class="spin" aria-hidden="true"></span><span id="go-t">Envoyer ma demande</span></button>
-      <p class="note"><span class="req">*</span> Champs obligatoires. Vos informations servent uniquement à vous recontacter au sujet de votre projet et ne sont transmises à aucun tiers.</p>
+      <button class="btn" type="submit" id="go"><span class="spin" aria-hidden="true"></span><span id="go-t">Envoyer ma demande<span class="zh" lang="zh-Hans">提交咨询</span></span></button>
+      <p class="note"><span class="req">*</span> Champs obligatoires. Vos informations servent uniquement à vous recontacter au sujet de votre projet et ne sont transmises à aucun tiers.<span class="zh" lang="zh-Hans"><span class="req">*</span> 为必填项。您的信息仅用于就您的项目与您联系，不会提供给任何第三方。</span></p>
     </div>
   </form>
 
   <div class="done" id="done" aria-live="polite">
-    <h2><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#b8232a"/><path d="M7 12.4l3.2 3.2L17 8.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>Demande envoyée</h2>
-    <p>Merci. Un consultant WIT vous recontacte au numéro indiqué.</p>
+    <h2><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#b8232a"/><path d="M7 12.4l3.2 3.2L17 8.8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Demande envoyée<span class="zh" lang="zh-Hans">已提交</span></span></h2>
+    <p>Merci. Un consultant WIT vous recontacte au numéro indiqué.<span class="zh" lang="zh-Hans">谢谢！WIT 顾问将通过您留下的号码与您联系。</span></p>
     <div class="recap" id="recap"></div>
-    <button class="again" type="button" id="again">Envoyer une autre demande</button>
+    <button class="again" type="button" id="again">Envoyer une autre demande<span class="zh" lang="zh-Hans">再次提交</span></button>
   </div>
 
   <section class="direct">
-    <h2>Nos agences</h2>
+    <h2>Nos agences<span class="zh" lang="zh-Hans">我们的办事处</span></h2>
     <a class="row" href="tel:+33183834438"><span>Roissy-en-France (95)</span><b>01 83 83 44 38</b></a>
     <a class="row" href="tel:+33486946526"><span>Aubagne (13)</span><b>04 86 94 65 26</b></a>
-    <a class="row" href="mailto:contact@wit-immobilier.fr"><span>Email</span><b>contact@wit-immobilier.fr</b></a>
+    <a class="row" href="mailto:contact@wit-immobilier.fr"><span>Email<i class="zh" lang="zh-Hans">邮箱</i></span><b>contact@wit-immobilier.fr</b></a>
   </section>
-  <p class="legal">WIT Immobilier d'entreprise</p>
+  <p class="legal">WIT Immobilier d'entreprise<span class="zh" lang="zh-Hans">WIT 企业地产</span></p>
 </main>
 
 <script>
@@ -275,7 +293,7 @@ form.addEventListener("submit", async e => {
     "Nom et prénom": nom,
     "Téléphone": tel,
     "Email": mail || "Non renseigné",
-    "C'est pour": projet,
+    "Projet": projet,
     "Je recherche": types,
     "Informations supplémentaires": $("msg").value.trim() || "—",
     "Provenance": src,
@@ -287,11 +305,11 @@ form.addEventListener("submit", async e => {
   if (mail) data._replyto = mail;
 
   if (!RECIPIENT) {
-    $("alert").textContent = "L'envoi n'est pas encore activé. Appelez-nous directement au 01 83 83 44 38.";
+    $("alert").textContent = "L'envoi n'est pas encore activé. Appelez-nous directement au 01 83 83 44 38. / 表单尚未启用，请直接致电 01 83 83 44 38。";
     $("alert").classList.add("on");
     return;
   }
-  const btn = $("go"); btn.disabled = true; $("go-t").textContent = "Envoi en cours…";
+  const btn = $("go"); const label = $("go-t").innerHTML; btn.disabled = true; $("go-t").textContent = "Envoi en cours… / 发送中……";
   try {
     const r = await fetch(`https://formsubmit.co/ajax/${RECIPIENT}`, {
       method: "POST", headers: { "Content-Type": "application/json", "Accept": "application/json" }, body: JSON.stringify(data)
@@ -301,16 +319,18 @@ form.addEventListener("submit", async e => {
     showDone(data);
   } catch (err) {
     $("alert").textContent = /activ/i.test(String(err.message))
-      ? "Le formulaire est en cours d'activation. Appelez-nous directement au 01 83 83 44 38."
-      : "L'envoi n'a pas abouti. Réessayez dans un instant ou appelez-nous au 01 83 83 44 38.";
+      ? "Le formulaire est en cours d'activation. Appelez-nous directement au 01 83 83 44 38. / 表单正在启用中，请直接致电 01 83 83 44 38。"
+      : "L'envoi n'a pas abouti. Réessayez dans un instant ou appelez-nous au 01 83 83 44 38. / 发送失败，请稍后重试或致电 01 83 83 44 38。";
     $("alert").classList.add("on");
   } finally {
-    btn.disabled = false; $("go-t").textContent = "Envoyer ma demande";
+    btn.disabled = false; $("go-t").innerHTML = label;
   }
 });
 
+const ZH = { "Achat":"购买", "Location":"租赁", "Vente":"出售", "Entrepôt":"仓库", "Bureau":"办公室", "Logistique":"物流", "Non précisé":"未说明" };
+const zh = v => v.split(", ").map(x => ZH[x] ? `${x} / ${ZH[x]}` : x).join(", ");
 function showDone(d){
-  const rows = [["Nom", d["Nom et prénom"]], ["Téléphone", d["Téléphone"]], ["C'est pour", d["C'est pour"]], ["Je recherche", d["Je recherche"]]];
+  const rows = [["Nom / 姓名", d["Nom et prénom"]], ["Téléphone / 电话", d["Téléphone"]], ["Projet / 项目", zh(d["Projet"])], ["Je recherche / 我在寻找", zh(d["Je recherche"])]];
   $("recap").innerHTML = rows.map(([k, v]) => `<div><small>${k}</small><b></b></div>`).join("");
   [...$("recap").querySelectorAll("b")].forEach((b, i) => b.textContent = rows[i][1]);
   form.style.display = "none"; $("done").classList.add("on");
