@@ -300,7 +300,9 @@ form.addEventListener("submit", async e => {
     if (!r.ok || String(j.success) === "false") throw new Error(j.message || r.status);
     showDone(data);
   } catch (err) {
-    $("alert").textContent = "L'envoi n'a pas abouti. Réessayez dans un instant ou appelez-nous au 01 83 83 44 38.";
+    $("alert").textContent = /activ/i.test(String(err.message))
+      ? "Le formulaire est en cours d'activation. Appelez-nous directement au 01 83 83 44 38."
+      : "L'envoi n'a pas abouti. Réessayez dans un instant ou appelez-nous au 01 83 83 44 38.";
     $("alert").classList.add("on");
   } finally {
     btn.disabled = false; $("go-t").textContent = "Envoyer ma demande";
